@@ -69,6 +69,7 @@ jobs:
     - task: mvn-test
       params:
         <<: *JAVA_OPS
+        GITHUB_ACCESS_TOKEN: ((github-access-token))
       config: &MVN_TEST_CONFIG
         platform: linux
         image_resource:
@@ -201,6 +202,7 @@ jobs:
   - task: mvn-test
     params:
       <<: *JAVA_OPS
+      GITHUB_ACCESS_TOKEN: ((github-access-token))
     config:
       <<: *MVN_TEST_CONFIG
     on_failure:
