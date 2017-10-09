@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class ContentsApiTest {
     GitHubClient client;
 
@@ -42,14 +44,21 @@ public class ContentsApiTest {
 
         ContentsResponse.Delete del = delete.block();
         System.out.println(del);
+        assertThat(del.getCommit()).isNotNull();
+        assertThat(del.getCommit().getMessage()).isEqualTo("Delete index5.html");
+        assertThat(del.getCommit().getCommitter()).isNotNull();
+        assertThat(del.getCommit().getCommitter().getName()).isEqualTo("Concourse Bot");
     }
 
     @Test
     public void testReadme() throws Exception {
-        Mono<ContentsResponse.File> readme = this.client.readme("making", "blog.ik.am")
+        Mono<ContentsResponse.File> readme = this.client.readme("making", "ik.am")
                 .get()
-                .log("reademe");
+                .log("readme");
         ContentsResponse.File rm = readme.block();
         System.out.println(rm);
+        assertThat(rm.decode()).isEqualTo("https://ik.am");
+        assertThat(rm.getPath()).isEqualTo("README.md");
+        assertThat(rm.getName()).isEqualTo("README.md");
     }
 }
