@@ -8,7 +8,7 @@ public class GitHubClient {
 
     public GitHubClient(String apiUrl, WebClient.Builder builder, AccessToken accessToken) {
         this.webClient = builder //
-                .baseUrl(apiUrl + "/repos/{owner}/{repo}/") //
+                .baseUrl(apiUrl) //
                 .defaultHeaders(accessToken.toAuthorization())
                 .build();
     }

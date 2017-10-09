@@ -19,14 +19,14 @@ public class ContentsApi {
 
         public Mono<ContentsResponse.File> get() {
             return this.webClient.get() //
-                    .uri("contents/{path}", owner, repo, path) //
+                    .uri("/repos/{owner}/{repo}/contents/{path}", owner, repo, path) //
                     .retrieve()
                     .bodyToMono(ContentsResponse.File.class);
         }
 
         public Mono<ContentsResponse.Put> create(ContentsRequest.Create create) {
             return this.webClient.put() //
-                    .uri("contents/{path}", owner, repo, path) //
+                    .uri("/repos/{owner}/{repo}/contents/{path}", owner, repo, path) //
                     .syncBody(create) //
                     .retrieve() //
                     .bodyToMono(ContentsResponse.Put.class);
@@ -34,7 +34,7 @@ public class ContentsApi {
 
         public Mono<ContentsResponse.Put> update(ContentsRequest.Update update) {
             return this.webClient.put() //
-                    .uri("contents/{path}", owner, repo, path) //
+                    .uri("/repos/{owner}/{repo}/contents/{path}", owner, repo, path) //
                     .syncBody(update) //
                     .retrieve() //
                     .bodyToMono(ContentsResponse.Put.class);
@@ -42,7 +42,7 @@ public class ContentsApi {
 
         public Mono<ContentsResponse.Delete> delete(ContentsRequest.Delete delete) {
             return this.webClient.delete() //
-                    .uri(b -> delete.buildingUri(b.path("contents/{path}")).build(owner, repo, path))
+                    .uri(b -> delete.buildingUri(b.path("/repos/{owner}/{repo}/contents/{path}")).build(owner, repo, path))
                     .retrieve() //
                     .bodyToMono(ContentsResponse.Delete.class);
         }
@@ -61,7 +61,7 @@ public class ContentsApi {
 
         public Mono<ContentsResponse.File> get() {
             return this.webClient.get() //
-                    .uri("readme", owner, repo) //
+                    .uri("/repos/{owner}/{repo}/readme", owner, repo) //
                     .retrieve()
                     .bodyToMono(ContentsResponse.File.class);
         }
