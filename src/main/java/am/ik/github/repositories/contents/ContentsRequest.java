@@ -1,4 +1,4 @@
-package am.ik.github.contents;
+package am.ik.github.repositories.contents;
 
 import am.ik.github.core.Committer;
 import com.fasterxml.jackson.annotation.JsonInclude;

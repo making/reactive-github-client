@@ -1,4 +1,4 @@
-package am.ik.github.contents;
+package am.ik.github.repositories.contents;
 
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;

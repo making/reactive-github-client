@@ -1,4 +1,4 @@
-package am.ik.github.contents;
+package am.ik.github.repositories.contents;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;

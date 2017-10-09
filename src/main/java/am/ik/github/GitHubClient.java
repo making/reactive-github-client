@@ -1,6 +1,6 @@
 package am.ik.github;
 
-import am.ik.github.contents.ContentsApi;
+import am.ik.github.repositories.contents.ContentsApi;
 import org.springframework.web.reactive.function.client.WebClient;
 
 public class GitHubClient {
