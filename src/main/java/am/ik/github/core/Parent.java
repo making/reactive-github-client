@@ -26,4 +26,16 @@ public class Parent {
                 ", htmlUrl='" + htmlUrl + '\'' +
                 '}';
     }
+
+    public String getSha() {
+        return sha;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
 }

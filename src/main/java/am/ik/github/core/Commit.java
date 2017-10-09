@@ -3,12 +3,14 @@ package am.ik.github.core;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class Commit extends Parent {
     private final Committer author;
     private final Committer committer;
     private final Tree tree;
     private final String message;
-    private final Parent parent;
+    private final List<Parent> parents;
 
     @JsonCreator
     public Commit(
@@ -19,13 +21,13 @@ public class Commit extends Parent {
             @JsonProperty("committer") Committer committer,
             @JsonProperty("tree") Tree tree,
             @JsonProperty("message") String message,
-            @JsonProperty("parent") Parent parent) {
+            @JsonProperty("parents") List<Parent> parents) {
         super(sha, url, htmlUrl);
         this.author = author;
         this.committer = committer;
         this.tree = tree;
         this.message = message;
-        this.parent = parent;
+        this.parents = parents;
     }
 
     public Committer getAuthor() {
@@ -44,8 +46,8 @@ public class Commit extends Parent {
         return message;
     }
 
-    public Parent getParent() {
-        return parent;
+    public List<Parent> getParents() {
+        return parents;
     }
 
     @Override
@@ -55,7 +57,7 @@ public class Commit extends Parent {
                 ", committer=" + committer +
                 ", tree=" + tree +
                 ", message='" + message + '\'' +
-                ", parent=" + parent +
+                ", parents=" + parents +
                 '}';
     }
 }
