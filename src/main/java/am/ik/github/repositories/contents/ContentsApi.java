@@ -6,6 +6,28 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public class ContentsApi {
+    public static class Contents {
+        private final WebClient webClient;
+        private final String owner;
+        private final String repo;
+        private final String path;
+
+        public Contents(WebClient webClient, String owner, String repo, String path) {
+            this.webClient = webClient;
+            this.owner = owner;
+            this.repo = repo;
+            this.path = path;
+        }
+
+        public Flux<Content> get() {
+            return this.webClient.get() //
+                    .uri("/repos/{owner}/{repo}/contents/{path}", owner, repo, path) //
+                    .retrieve()
+                    .bodyToFlux(Content.class);
+        }
+    }
+
+
     public static class File {
         private final WebClient webClient;
         private final String owner;
@@ -24,13 +46,6 @@ public class ContentsApi {
                     .uri("/repos/{owner}/{repo}/contents/{path}", owner, repo, path) //
                     .retrieve()
                     .bodyToMono(ContentsResponse.File.class);
-        }
-
-        public Flux<Content> contents() {
-            return this.webClient.get() //
-                    .uri("/repos/{owner}/{repo}/contents/{path}", owner, repo, path) //
-                    .retrieve()
-                    .bodyToFlux(Content.class);
         }
 
         public Mono<ContentsResponse.Put> create(ContentsRequest.Create create) {

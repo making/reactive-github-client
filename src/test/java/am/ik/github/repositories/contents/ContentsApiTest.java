@@ -69,7 +69,7 @@ public class ContentsApiTest {
 
     @Test
     public void testContents() {
-        Flux<Content> flux = this.client.file("making-dev", "making-dev.github.io").contents();
+        Flux<Content> flux = this.client.contents("making-dev", "making-dev.github.io").get();
         List<Content> contents = flux.collectList().block();
         System.out.println(contents);
         assertThat(contents).isNotEmpty();

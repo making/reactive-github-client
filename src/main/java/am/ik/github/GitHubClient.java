@@ -25,7 +25,11 @@ public class GitHubClient {
         return new ContentsApi.File(webClient, owner, repo, path);
     }
 
-    public ContentsApi.File file(String owner, String repo) {
-        return new ContentsApi.File(webClient, owner, repo, "");
+    public ContentsApi.Contents contents(String owner, String repo, String path) {
+        return new ContentsApi.Contents(webClient, owner, repo, path);
+    }
+
+    public ContentsApi.Contents contents(String owner, String repo) {
+        return this.contents(owner, repo, "");
     }
 }
