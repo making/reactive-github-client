@@ -6,6 +6,7 @@ GitHub API Client that uses Reactor's `Flux`/`Mono` and Spring 5's `WebClient`.
 
 * Repositories
   * [Contents](https://developer.github.com/v3/repos/contents/)
+  * [Commits](https://developer.github.com/v3/repos/commits/)
   
 ## Usage
 

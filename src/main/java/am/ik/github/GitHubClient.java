@@ -1,5 +1,6 @@
 package am.ik.github;
 
+import am.ik.github.repositories.commits.CommitsApi;
 import am.ik.github.repositories.contents.ContentsApi;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -31,5 +32,9 @@ public class GitHubClient {
 
     public ContentsApi.Contents contents(String owner, String repo) {
         return this.contents(owner, repo, "");
+    }
+
+    public CommitsApi.Commits commits(String owner, String repo) {
+        return new CommitsApi.Commits(webClient, owner, repo);
     }
 }
