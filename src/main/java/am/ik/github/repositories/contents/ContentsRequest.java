@@ -2,9 +2,9 @@ package am.ik.github.repositories.contents;
 
 import am.ik.github.core.Committer;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.util.UriBuilder;
 
-import java.util.Base64;
 import java.util.Objects;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -132,7 +132,7 @@ public abstract class ContentsRequest {
 
         public static Builder fromPlainText(String content) {
             byte[] bytes = Objects.requireNonNull(content).getBytes(UTF_8);
-            String encoded = Base64.getEncoder().encodeToString(bytes);
+            String encoded = Base64Utils.encodeToString(bytes);
             return new Builder(encoded);
         }
 
