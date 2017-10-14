@@ -1,8 +1,13 @@
 package am.ik.github.repositories.contents;
 
+import am.ik.github.core.Content;
+import am.ik.github.core.ContentType;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,7 +25,7 @@ public class ContentsResponseTest {
                 "    \"html_url\": \"https://github.com/making-dev/making-dev.github.io/blob/master/index5.html\",\n" +
                 "    \"git_url\": \"https://api.github.com/repos/making-dev/making-dev.github.io/git/blobs/5ab2f8a4323abafb10abb68657d9d39f1a775057\",\n" +
                 "    \"download_url\": \"https://raw.githubusercontent.com/making-dev/making-dev.github.io/master/index5.html\",\n" +
-                "    \"type\": \"file\",\n" +
+                "    \"type\": \"FILE\",\n" +
                 "    \"_links\": {\n" +
                 "      \"self\": \"https://api.github.com/repos/making-dev/making-dev.github.io/contents/index5.html?ref=master\",\n" +
                 "      \"git\": \"https://api.github.com/repos/making-dev/making-dev.github.io/git/blobs/5ab2f8a4323abafb10abb68657d9d39f1a775057\",\n" +
@@ -71,5 +76,74 @@ public class ContentsResponseTest {
         assertThat(put.getContent().getPath()).isEqualTo("index5.html");
         assertThat(put.getContent().getSha()).isEqualTo("5ab2f8a4323abafb10abb68657d9d39f1a775057");
         assertThat(put.getContent().getUrl()).isEqualTo("https://api.github.com/repos/making-dev/making-dev.github.io/contents/index5.html?ref=master");
+    }
+
+
+    @Test
+    public void files() throws Exception {
+        String json = "[\n" +
+                "  {\n" +
+                "    \"name\": \"foo\",\n" +
+                "    \"path\": \"foo\",\n" +
+                "    \"sha\": \"f17950c4c55f9c27df2e40bfcc68c967eca9153c\",\n" +
+                "    \"size\": 0,\n" +
+                "    \"url\": \"https://api.github.com/repos/making-dev/making-dev.github.io/contents/foo?ref=master\",\n" +
+                "    \"html_url\": \"https://github.com/making-dev/making-dev.github.io/tree/master/foo\",\n" +
+                "    \"git_url\": \"https://api.github.com/repos/making-dev/making-dev.github.io/git/trees/f17950c4c55f9c27df2e40bfcc68c967eca9153c\",\n" +
+                "    \"download_url\": null,\n" +
+                "    \"type\": \"DIR\",\n" +
+                "    \"_links\": {\n" +
+                "      \"self\": \"https://api.github.com/repos/making-dev/making-dev.github.io/contents/foo?ref=master\",\n" +
+                "      \"git\": \"https://api.github.com/repos/making-dev/making-dev.github.io/git/trees/f17950c4c55f9c27df2e40bfcc68c967eca9153c\",\n" +
+                "      \"html\": \"https://github.com/making-dev/making-dev.github.io/tree/master/foo\"\n" +
+                "    }\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"index.html\",\n" +
+                "    \"path\": \"index.html\",\n" +
+                "    \"sha\": \"fa23a88dabb62b83e2c03b0f12b4d5bfcbae3494\",\n" +
+                "    \"size\": 86,\n" +
+                "    \"url\": \"https://api.github.com/repos/making-dev/making-dev.github.io/contents/index.html?ref=master\",\n" +
+                "    \"html_url\": \"https://github.com/making-dev/making-dev.github.io/blob/master/index.html\",\n" +
+                "    \"git_url\": \"https://api.github.com/repos/making-dev/making-dev.github.io/git/blobs/fa23a88dabb62b83e2c03b0f12b4d5bfcbae3494\",\n" +
+                "    \"download_url\": \"https://raw.githubusercontent.com/making-dev/making-dev.github.io/master/index.html\",\n" +
+                "    \"type\": \"FILE\",\n" +
+                "    \"_links\": {\n" +
+                "      \"self\": \"https://api.github.com/repos/making-dev/making-dev.github.io/contents/index.html?ref=master\",\n" +
+                "      \"git\": \"https://api.github.com/repos/making-dev/making-dev.github.io/git/blobs/fa23a88dabb62b83e2c03b0f12b4d5bfcbae3494\",\n" +
+                "      \"html\": \"https://github.com/making-dev/making-dev.github.io/blob/master/index.html\"\n" +
+                "    }\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"index4.html\",\n" +
+                "    \"path\": \"index4.html\",\n" +
+                "    \"sha\": \"5ab2f8a4323abafb10abb68657d9d39f1a775057\",\n" +
+                "    \"size\": 5,\n" +
+                "    \"url\": \"https://api.github.com/repos/making-dev/making-dev.github.io/contents/index4.html?ref=master\",\n" +
+                "    \"html_url\": \"https://github.com/making-dev/making-dev.github.io/blob/master/index4.html\",\n" +
+                "    \"git_url\": \"https://api.github.com/repos/making-dev/making-dev.github.io/git/blobs/5ab2f8a4323abafb10abb68657d9d39f1a775057\",\n" +
+                "    \"download_url\": \"https://raw.githubusercontent.com/making-dev/making-dev.github.io/master/index4.html\",\n" +
+                "    \"type\": \"FILE\",\n" +
+                "    \"_links\": {\n" +
+                "      \"self\": \"https://api.github.com/repos/making-dev/making-dev.github.io/contents/index4.html?ref=master\",\n" +
+                "      \"git\": \"https://api.github.com/repos/making-dev/making-dev.github.io/git/blobs/5ab2f8a4323abafb10abb68657d9d39f1a775057\",\n" +
+                "      \"html\": \"https://github.com/making-dev/making-dev.github.io/blob/master/index4.html\"\n" +
+                "    }\n" +
+                "  }\n" +
+                "]";
+        ObjectMapper objectMapper = new Jackson2ObjectMapperBuilder().build();
+        List<Content> contents = objectMapper.readValue(json, new TypeReference<List<Content>>() {
+        });
+        assertThat(contents).isNotEmpty();
+        assertThat(contents).hasSize(3);
+        assertThat(contents.get(0).getName()).isEqualTo("foo");
+        assertThat(contents.get(0).getPath()).isEqualTo("foo");
+        assertThat(contents.get(0).getType()).isEqualTo(ContentType.DIR);
+        assertThat(contents.get(1).getName()).isEqualTo("index.html");
+        assertThat(contents.get(1).getPath()).isEqualTo("index.html");
+        assertThat(contents.get(1).getType()).isEqualTo(ContentType.FILE);
+        assertThat(contents.get(2).getName()).isEqualTo("index4.html");
+        assertThat(contents.get(2).getPath()).isEqualTo("index4.html");
+        assertThat(contents.get(2).getType()).isEqualTo(ContentType.FILE);
     }
 }

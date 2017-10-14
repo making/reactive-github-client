@@ -1,6 +1,8 @@
 package am.ik.github.repositories.contents;
 
+import am.ik.github.core.Content;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public class ContentsApi {
@@ -22,6 +24,13 @@ public class ContentsApi {
                     .uri("/repos/{owner}/{repo}/contents/{path}", owner, repo, path) //
                     .retrieve()
                     .bodyToMono(ContentsResponse.File.class);
+        }
+
+        public Flux<Content> contents() {
+            return this.webClient.get() //
+                    .uri("/repos/{owner}/{repo}/contents/{path}", owner, repo, path) //
+                    .retrieve()
+                    .bodyToFlux(Content.class);
         }
 
         public Mono<ContentsResponse.Put> create(ContentsRequest.Create create) {

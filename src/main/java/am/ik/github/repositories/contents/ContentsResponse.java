@@ -2,6 +2,7 @@ package am.ik.github.repositories.contents;
 
 import am.ik.github.core.Commit;
 import am.ik.github.core.Content;
+import am.ik.github.core.ContentType;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -68,8 +69,9 @@ public abstract class ContentsResponse {
                     @JsonProperty("git_url") String gitUrl,
                     @JsonProperty("html_url") String htmlUrl,
                     @JsonProperty("download_url") String downloadUrl,
-                    @JsonProperty("content") String content) {
-            super(name, path, sha, url, gitUrl, htmlUrl, downloadUrl, "file");
+                    @JsonProperty("content") String content,
+                    @JsonProperty("type") ContentType type) {
+            super(name, path, sha, url, gitUrl, htmlUrl, downloadUrl, (type == null ? ContentType.FILE : type));
             this.content = content;
         }
 
@@ -79,6 +81,21 @@ public abstract class ContentsResponse {
 
         public String getContent() {
             return content;
+        }
+
+        @Override
+        public String toString() {
+            return "File{" +
+                    "name='" + getName() + '\'' +
+                    ", path='" + getPath() + '\'' +
+                    ", sha='" + getSha() + '\'' +
+                    ", url='" + getUrl() + '\'' +
+                    ", gitUrl='" + getGitUrl() + '\'' +
+                    ", htmlUrl='" + getHtmlUrl() + '\'' +
+                    ", downloadUrl='" + getDownloadUrl() + '\'' +
+                    ", type='" + getType() + '\'' +
+                    ", content='" + getContent() + '\'' +
+                    '}';
         }
     }
 }

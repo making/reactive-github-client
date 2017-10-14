@@ -11,7 +11,7 @@ public class Content {
     private final String gitUrl;
     private final String htmlUrl;
     private final String downloadUrl;
-    private final String type;
+    private final ContentType type;
 
     @JsonCreator
     public Content(@JsonProperty("name") String name,
@@ -21,7 +21,7 @@ public class Content {
                    @JsonProperty("git_url") String gitUrl,
                    @JsonProperty("html_url") String htmlUrl,
                    @JsonProperty("download_url") String downloadUrl,
-                   @JsonProperty("type") String type) {
+                   @JsonProperty("type") ContentType type) {
         this.name = name;
         this.path = path;
         this.sha = sha;
@@ -60,7 +60,7 @@ public class Content {
         return downloadUrl;
     }
 
-    public String getType() {
+    public ContentType getType() {
         return type;
     }
 
