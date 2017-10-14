@@ -6,7 +6,7 @@
 
     <groupId>am.ik.github</groupId>
     <artifactId>reactive-github-client</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4-SNAPSHOT</version>
     <properties>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
