@@ -132,7 +132,7 @@ public abstract class ContentsRequest {
 
         public static Builder fromPlainText(String content) {
             byte[] bytes = Objects.requireNonNull(content).getBytes(UTF_8);
-            String encoded = Base64.getMimeEncoder().encodeToString(bytes);
+            String encoded = Base64.getEncoder().encodeToString(bytes);
             return new Builder(encoded);
         }
 
